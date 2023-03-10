@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Container } from "@mui/system";
-import { Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import { useState } from "react";
 
 export default function Student() {
@@ -14,6 +14,19 @@ export default function Student() {
 
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        const student = { name, address };
+        console.log(student);
+        fetch("http://localhost:8080/student/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(student),
+        }).then(() => {
+            console.log("new student added");
+        });
+    };
 
     return (
         <Container>
@@ -45,6 +58,13 @@ export default function Student() {
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                     />
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={handleClick}
+                    >
+                        Submit
+                    </Button>
                 </Box>
             </Paper>
         </Container>
