@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import { Container } from "@mui/system";
 import { Button, Paper } from "@mui/material";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Student() {
     const paperStyle = {
@@ -14,6 +15,7 @@ export default function Student() {
 
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
+    const [students, setStudents] = useState([]);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -26,6 +28,17 @@ export default function Student() {
         }).then(() => {
             console.log("new student added");
         });
+    };
+
+    useEffect(() => {
+        fetch("http://localhost:8080/student/getAll")
+            .then((res) => res.json())
+            .then((result) => {
+                setStudents(result);
+            });
+    }, {});
+    return () => {
+        second;
     };
 
     return (
@@ -66,6 +79,24 @@ export default function Student() {
                         Submit
                     </Button>
                 </Box>
+            </Paper>
+            <h1>Students</h1>
+            <Paper elevation={3} style={paperStyle}>
+                {students.map((student) => (
+                    <Paper
+                        elevation={6}
+                        style={{
+                            margin: "10px",
+                            padding: "15px",
+                            textAlign: "left",
+                        }}
+                        key={student.id}
+                    >
+                        id: {student.id} <br />
+                        Name: {student.name} <br />
+                        Address: {student.address} <br />
+                    </Paper>
+                ))}
             </Paper>
         </Container>
     );
