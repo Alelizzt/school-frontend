@@ -1,10 +1,8 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Container } from "@mui/system";
 import { Button, Paper } from "@mui/material";
-import { useState } from "react";
-import { useEffect } from "react";
 
 export default function Student() {
     const paperStyle = {
@@ -37,9 +35,6 @@ export default function Student() {
                 setStudents(result);
             });
     }, {});
-    return () => {
-        second;
-    };
 
     return (
         <Container>

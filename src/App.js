@@ -1,11 +1,13 @@
 import "./App.css";
-import AppBar from "./components/AppBar";
+import React from "react";
+
 import Student from "./components/Student";
+import Appbar from "./components/Appbar";
 
 function App() {
     return (
         <div className="App">
-            <AppBar />
+            <Appbar />
             <Student />
         </div>
     );
